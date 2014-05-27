@@ -2,15 +2,12 @@ package godEngine.gameContent;
 import godEngine.gameDependencies.CellMap;
 import godEngine.gameDependencies.GameException;
 
-
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
-
-import javax.swing.text.html.MinimalHTMLWriter;
 
 
 
