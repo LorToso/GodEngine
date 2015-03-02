@@ -37,8 +37,11 @@ public class SimpleImage
 	{
 		String completePath = GodUtilities.getCompletePath(imagePath);
 		File inputFile = new File(completePath);
-		
-		
+
+        String a = inputFile.getName();
+        String b = inputFile.getAbsolutePath();
+
+
 		BufferedImage loadedImage = null;
 		try { // TODO Check whats going on
 			BufferedImage lImage = ImageIO.read(inputFile);
@@ -152,7 +155,7 @@ public class SimpleImage
 		{
 			for(int x = 0; x<absoluteWidth; x++)
 			{
-				// Falls die Zelle schon belegt ist, zur nächsten Zelle gehen
+				// Falls die Zelle schon belegt ist, zur nï¿½chsten Zelle gehen
 				if(occupiedCells[x/GodImage.worldCellSize][y/GodImage.worldCellSize] != 0) continue;
 
 				occupiedCells[x/GodImage.worldCellSize][y/GodImage.worldCellSize] = (imageColors[x+y*absoluteWidth] >> 24) & 0x000000FF;

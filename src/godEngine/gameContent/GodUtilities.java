@@ -1,19 +1,20 @@
 package godEngine.gameContent;
 
 
-import java.awt.Rectangle;
+import godEngine.gameDependencies.GameException;
+
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
-
-import godEngine.gameDependencies.GameException;
 
 public class GodUtilities 
 {
 
-	public static final String IMAGE_FOLDER_NAME 		= "/images";
-	public static final String SOUND_FOLDER_NAME 		= "/sounds";
-	public static final String IMAGE_FOLDER_PATH 		= new Object(){}.getClass().getEnclosingClass().getResource(IMAGE_FOLDER_NAME).getPath().substring(1).replace('/', '\\');
-	public static final String SOUND_FOLDER_PATH 		= new Object(){}.getClass().getEnclosingClass().getResource(SOUND_FOLDER_NAME).getPath().substring(1).replace('/', '\\');
+    public static final String ROOT                     = ClassLoader.getSystemClassLoader().getResource("").getPath();
+	public static final String IMAGE_FOLDER_NAME 		= File.separator + "images";
+	public static final String SOUND_FOLDER_NAME 		= File.separator + "sounds";
+	public static final String IMAGE_FOLDER_PATH 		= ROOT + File.separator + IMAGE_FOLDER_NAME;
+	public static final String SOUND_FOLDER_PATH 		= ROOT + File.separator + SOUND_FOLDER_NAME;
 	public static final String DEFAULT_ACTOR_IMAGE 		=  "defaultActor.jpg";
 	public static final String DEFAULT_BACKGROUND_IMAGE =  "defaultBackground.jpg";
 	private static World world							= null;
@@ -57,9 +58,8 @@ public class GodUtilities
 		}
 		else
 		{
-			completePath 	= GodUtilities.IMAGE_FOLDER_PATH + "\\" + path;
+			completePath 	= GodUtilities.IMAGE_FOLDER_PATH + File.separator + path;
 		}
-		completePath.replaceAll("/", "\\");
 		
 		return completePath;
 	}
