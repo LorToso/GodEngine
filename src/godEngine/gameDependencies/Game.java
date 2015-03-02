@@ -20,11 +20,11 @@ public class Game {
 	private static String graphics				= DEFAULT_GRAPHICS;
 	private static int input					= NO_INPUT;
 	
-	public static boolean TEST_ACCELEATION		= false;
+	public static boolean TEST_ACCELERATION = false;
 	
 	public static void main(String[] args) 
 	{
-		if(TEST_ACCELEATION) System.setProperty("sun.java2d.opengl", "True"); // TODO: Check if this speeds up anything
+		if(TEST_ACCELERATION) System.setProperty("sun.java2d.opengl", "True"); // TODO: Check if this speeds up anything
 		try
 		{
 			parseArguments(args);
@@ -61,43 +61,39 @@ public class Game {
 	}
 	private static void parseArguments(String[] args) 
 	{
-		for(int i = 0; i<args.length; i++)
-		{
-			String argument = args[i];
-			if(argument.startsWith("world="))
-			{
-				world = argument.substring(6);
-			}
-			else if(argument.startsWith("title="))
-			{
-				title = argument.substring(6);
-			}
-			else if(argument.startsWith("graphics="))
-			{
-				argument = argument.substring(9);
-				if(argument.equals("default"))
-					graphics = DEFAULT_GRAPHICS;
-				else if(argument.equals("text"))
-					graphics = TEXT_GRAPHICS;
-				else
-					graphics = argument;
-			}
-			else if(argument.startsWith("input="))
-			{
-				argument = argument.substring(6);
-				if(argument.equals("default"))
-					input = NO_INPUT;
-				else
-				{
-					if(argument.contains("keyboard"))
-						input |= KEYBOARD_INPUT;
-					if(argument.contains("mouse"))
-						input |= MOUSE_INPUT;
-					if(argument.contains("mousewheel"))
-						input |= MOUSE_WHEEL_INPUT;
-				}
-			}
-		}
+        for (String arg : args) {
+            String argument = arg;
+            if (argument.startsWith("world=")) {
+                world = argument.substring(6);
+            } else if (argument.startsWith("title=")) {
+                title = argument.substring(6);
+            } else if (argument.startsWith("graphics=")) {
+                argument = argument.substring(9);
+                switch (argument) {
+                    case "default":
+                        graphics = DEFAULT_GRAPHICS;
+                        break;
+                    case "text":
+                        graphics = TEXT_GRAPHICS;
+                        break;
+                    default:
+                        graphics = argument;
+                        break;
+                }
+            } else if (argument.startsWith("input=")) {
+                argument = argument.substring(6);
+                if (argument.equals("default"))
+                    input = NO_INPUT;
+                else {
+                    if (argument.contains("keyboard"))
+                        input |= KEYBOARD_INPUT;
+                    if (argument.contains("mouse"))
+                        input |= MOUSE_INPUT;
+                    if (argument.contains("mousewheel"))
+                        input |= MOUSE_WHEEL_INPUT;
+                }
+            }
+        }
 	}
 	private static void prepareWindow(JFrame window, JPanel gamePanel)
 	{
@@ -112,12 +108,12 @@ public class Game {
 	@SuppressWarnings("unchecked")
 	private static GraphicEngine createGraphicEngine(String newGraphics) throws GameException
 	{	
-		Class<GraphicEngine> graphicEngineClass = null;
-		GraphicEngine ge 						= null;
+		Class<GraphicEngine> graphicEngineClass;
+		GraphicEngine ge;
 		
 		try {
 			graphicEngineClass 					= (Class<GraphicEngine>) Class.forName(newGraphics);
-			ge 									= (GraphicEngine) graphicEngineClass.newInstance();
+			ge 									= graphicEngineClass.newInstance();
 		} catch (ClassNotFoundException e) 
 		{
 			throw new GameException(GameException.ERROR_GRAPHIC_ENGINE_NOT_FOUND);

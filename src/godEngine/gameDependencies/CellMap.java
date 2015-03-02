@@ -115,7 +115,7 @@ public class CellMap
 
 				if(newRect.contains(new Point(x, y)))
 				{
-					// Wenn Transparent, �berspringen;
+					// skip when transparent
 					if(movedActor.getImage().isTransparentAt(x-newRect.x, y-newRect.y)) continue;
 					
 					if(occupiedCells[x][y] == null)

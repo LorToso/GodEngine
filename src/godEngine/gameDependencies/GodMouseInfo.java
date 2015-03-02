@@ -14,7 +14,7 @@ public class GodMouseInfo
 
 	public GodMouseInfo()
 	{
-		buttonPressed = new HashMap<Integer, Boolean>();
+		buttonPressed = new HashMap<>();
 	}
 	public GodMouseInfo(GodMouseInfo copy)
 	{
@@ -26,7 +26,7 @@ public class GodMouseInfo
 		
 		
 		HashMap<Integer, Boolean>oldHashMap = copy.getButtonsPressed();
-		buttonPressed = new HashMap<Integer, Boolean>();
+		buttonPressed = new HashMap<>();
 		
 		// Deep copy of Hashmap
 		

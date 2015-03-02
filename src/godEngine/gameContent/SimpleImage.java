@@ -3,15 +3,14 @@ package godEngine.gameContent;
 import godEngine.gameDependencies.Game;
 import godEngine.gameDependencies.GameException;
 
-import java.awt.Transparency;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-
-import javax.imageio.ImageIO;
 
 public class SimpleImage
 {
@@ -51,7 +50,7 @@ public class SimpleImage
 			throw new GameException(GameException.ERROR_NOT_A_VALID_IMAGE);
 		}
 
-		if(Game.TEST_ACCELEATION) return createQuickImage(loadedImage);
+		if(Game.TEST_ACCELERATION) return createQuickImage(loadedImage);
 		else return loadedImage;
 	}
 	protected static BufferedImage createQuickImage(BufferedImage oldImage)
@@ -64,8 +63,7 @@ public class SimpleImage
 	public static BufferedImage createQuickImage(int width, int height)
 	{
 		// TODO: This is to test if it makes an actual difference if we create a "good" image
-		BufferedImage quickImage = GodImage.graphicsConfiguration.createCompatibleImage(width, height, Transparency.TRANSLUCENT);
-		return quickImage;
+        return GodImage.graphicsConfiguration.createCompatibleImage(width, height, Transparency.TRANSLUCENT);
 	}
 	
 	/**
@@ -79,10 +77,6 @@ public class SimpleImage
 		 boolean isAlphaPremultiplied 	= cm.isAlphaPremultiplied();
 		 WritableRaster raster 			= bi.copyData(null);
 		 return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
-	}	
-	public static void initialize(int cellSize)
-	{
-		// TODO: Delete?
 	}
 	
 	private BufferedImage myImage	=	null;
@@ -120,7 +114,6 @@ public class SimpleImage
 	 * A private Constructor which is used for the doClone() method. It does not recalculate the occupied cells.
 	 * @param image			The BufferedImage.
 	 * @param path			The path that is supposed to be set to the image.
-	 * @param cellSize		The cellSize of the World the image is going to be in.
 	 * @param occupiedCells The cells the image occupies.
 	 */
 	private SimpleImage(BufferedImage image, String path, int[][] occupiedCells)
@@ -173,9 +166,8 @@ public class SimpleImage
 		int[][] copyOfOccupiedCells = new int[occupiedCells.length][occupiedCells[0].length];
 		for(int i=0; i< copyOfOccupiedCells.length; i++)
 			copyOfOccupiedCells[i] = Arrays.copyOf(occupiedCells[i], occupiedCells[i].length);
-		
-		SimpleImage newSI 		= new SimpleImage(newImage, imagePath, occupiedCells);
-		return newSI;
+
+        return new SimpleImage(newImage, imagePath, occupiedCells);
 	}
 	public boolean isTransparentAt(int dx, int dy)
 	{

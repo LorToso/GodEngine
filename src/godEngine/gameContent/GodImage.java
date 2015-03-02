@@ -45,7 +45,7 @@ public class GodImage
 	
 	public static void preLoadImages() throws GameException
 	{
-		preLoadedImages = new HashMap<String, SimpleImage>();
+		preLoadedImages = new HashMap<>();
 		
 		ArrayList<File> allFiles = GodUtilities.getAllFilesInDirectory(new File(GodUtilities.IMAGE_FOLDER_PATH));
 		for(File file : allFiles)
@@ -133,18 +133,18 @@ public class GodImage
 				
 		double radianAngle		=	Math.toRadians(rotation);
 				
-		BufferedImage newImage	= 	null;
+		BufferedImage newImage;
 		
-		if(Game.TEST_ACCELEATION) 	newImage = SimpleImage.createQuickImage(rotatedSize.x, rotatedSize.y);
+		if(Game.TEST_ACCELERATION) 	newImage = SimpleImage.createQuickImage(rotatedSize.x, rotatedSize.y);
 		else						newImage = new BufferedImage(rotatedSize.x, rotatedSize.y, BufferedImage.TYPE_INT_ARGB);
 
 		Graphics2D g 			=	newImage.createGraphics();        
-		if(!Game.TEST_ACCELEATION) 	g.setBackground(new Color(255, 255, 255, 0));  
+		if(!Game.TEST_ACCELERATION) 	g.setBackground(new Color(255, 255, 255, 0));
         
         if(isRotated())
         	g.rotate(radianAngle, rotatedSize.x/2, rotatedSize.y/2);
         
-        g.drawImage(input, (int)(rotatedSize.x - scaledSize.x)/2, (int)(rotatedSize.y - scaledSize.y)/2, scaledSize.x, scaledSize.y,	null);        
+        g.drawImage(input, (rotatedSize.x - scaledSize.x) /2, (rotatedSize.y - scaledSize.y) /2, scaledSize.x, scaledSize.y,	null);
 
         if(isTransparencyChanged())
         	newImage = applyTransparency(newImage, transparency);

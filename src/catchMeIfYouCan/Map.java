@@ -18,8 +18,8 @@ public class Map extends World
 	{
 		this(700,700,1);
 		God.setFPS(60);
-		allMoves = new ArrayList<Direction>();
-		allClones = new ArrayList<Clone>();
+		allMoves = new ArrayList<>();
+		allClones = new ArrayList<>();
 		setBackground("defaultBackground2.jpg");
 	}
 	

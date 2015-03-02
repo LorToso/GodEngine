@@ -21,7 +21,7 @@ public class InputEngine implements KeyListener, MouseListener, MouseMotionListe
 	public InputEngine(int inputMethod) 
 	{
 		this.inputMethod = inputMethod;
-		keyStates = new HashMap<Integer, Boolean>();
+		keyStates = new HashMap<>();
 		mouseInfo = new GodMouseInfo();
 	}
 	public void initialize(GamePanel panel, God god)

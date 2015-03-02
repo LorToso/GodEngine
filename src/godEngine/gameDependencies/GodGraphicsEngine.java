@@ -29,7 +29,7 @@ public class GodGraphicsEngine implements GraphicEngine
 		initializeImages();
 		loadResources();
 		
-		if(Game.TEST_ACCELEATION)
+		if(Game.TEST_ACCELERATION)
 		{
 			this.frame		=	SimpleImage.createQuickImage(this.world.getWidth()  * this.world.getCellSize(), this.world.getHeight()  * this.world.getCellSize());
 		}

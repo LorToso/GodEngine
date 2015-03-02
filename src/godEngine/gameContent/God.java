@@ -82,10 +82,10 @@ public class God
 	}
 	private void gameLoop() throws GameException 
 	{
-		long startTime		= 	0;
-		long elapsedTime	= 	0;		
-		long averageTime	=	0;
-		long frameTime		=	0;
+		long startTime;
+		long elapsedTime;
+		long averageTime = 0;
+		long frameTime;
 
 		while(gameRunning)			// This double loop is made to be able to restart the game after it stopped.
 		{			
@@ -123,12 +123,11 @@ public class God
 	{
 		ArrayList<Actor> placedActors = (ArrayList<Actor>) myWorld.getObjects(Actor.class);
 		Actor chosenActor = null;
-		
-		for(int i=0; i<placedActors.size(); i++ )
-		{
-			chosenActor = placedActors.get(i);
-			chosenActor.doAct();
-		}
+
+        for (Actor placedActor : placedActors) {
+            chosenActor = placedActor;
+            chosenActor.doAct();
+        }
 	}
 	public World getWorld()
 	{
@@ -146,7 +145,7 @@ public class God
 		World world = null;
 		try {
 			worldClass = (Class<World>) Class.forName(worldPath);
-			world = (World)worldClass.newInstance();
+			world = worldClass.newInstance();
 		} catch (ClassNotFoundException e) 
 		{
 			throw new GameException(GameException.ERROR_WORLD_NOT_FOUND);

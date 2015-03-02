@@ -16,7 +16,7 @@ public class GodSound
 
 	public static void preLoadSounds() throws GameException
 	{
-		preLoadedSounds = new HashMap<String, Clip>();
+		preLoadedSounds = new HashMap<>();
 		
 		ArrayList<File> allFiles = GodUtilities.getAllFilesInDirectory(new File(GodUtilities.SOUND_FOLDER_PATH));
 		for(File file : allFiles)

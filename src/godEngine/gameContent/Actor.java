@@ -221,7 +221,7 @@ public abstract class Actor
 	public List<Actor> getIntersectingObjects(Class<? extends Actor> actorClass) throws GameException
 	{
 		List<Actor> intersectingObjectsAtPosition = null;
-		HashSet<Actor> allIntersectingObjects = new HashSet<Actor>();
+		HashSet<Actor> allIntersectingObjects = new HashSet<>();
 		Rectangle myRect = getRect();
 		
 		for(double dy = myRect.getMinY(); dy < myRect.getMaxY(); dy++)
@@ -231,20 +231,17 @@ public abstract class Actor
 				intersectingObjectsAtPosition = getWorld().getObjectsAt((int)dx,(int)dy, actorClass);
 				if(intersectingObjectsAtPosition.contains(this))
 				{
-					for(int i = 0; i<intersectingObjectsAtPosition.size(); i++)
-					{
-						Actor chosenActor = intersectingObjectsAtPosition.get(i);
-						if(chosenActor == this) continue;
-						if(actorClass.isAssignableFrom(chosenActor.getClass()))
-						{
-							allIntersectingObjects.add(chosenActor);
-						}
-					}
+                    for (Actor chosenActor : intersectingObjectsAtPosition) {
+                        if (chosenActor == this) continue;
+                        if (actorClass.isAssignableFrom(chosenActor.getClass())) {
+                            allIntersectingObjects.add(chosenActor);
+                        }
+                    }
 				}
 			}	
 		}
 		
-		return new ArrayList<Actor>(allIntersectingObjects);
+		return new ArrayList<>(allIntersectingObjects);
 	}
 	public List<Actor> getIntersectingObjects() throws GameException
 	{

@@ -1,10 +1,9 @@
 package catchMeIfYouCan;
 
-import java.awt.event.KeyEvent;
-
-import godEngine.gameContent.Actor;
 import godEngine.gameContent.God;
 import godEngine.gameDependencies.GameException;
+
+import java.awt.event.KeyEvent;
 
 public class Player extends MovingObject {
 
