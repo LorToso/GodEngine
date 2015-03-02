@@ -21,15 +21,19 @@ public class GodUtilities
 	
 	public static ArrayList<File> getAllFilesInDirectory(File directory)
 	{
-		ArrayList<File> allFiles = new ArrayList<File>();
+		ArrayList<File> allFiles = new ArrayList<>();
 		
 		if(directory.isFile())
 		{
 			allFiles.add(directory);
 			return allFiles;
 		}
-			
-		for(File subFile : directory.listFiles())
+
+		File[] allSubDirectories = directory.listFiles();
+        if(allSubDirectories == null)
+            return allFiles;
+
+		for(File subFile : allSubDirectories)
 		{
 			allFiles.addAll(getAllFilesInDirectory(subFile));
 		}
@@ -50,7 +54,7 @@ public class GodUtilities
 	}
 	public static String getCompletePath(String path)
 	{
-		String completePath = null;
+		String completePath;
 
 		if(new File(path).isAbsolute())
 		{

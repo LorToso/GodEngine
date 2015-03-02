@@ -1,10 +1,10 @@
 package catchMeIfYouCan;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-
 import godEngine.gameContent.Actor;
 import godEngine.gameDependencies.GameException;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class MovingObject extends Actor {
 	double speed = 2;
@@ -74,10 +74,7 @@ public class MovingObject extends Actor {
 		default:
 			break;
 		}
-		if(length!=0 || dir==Direction.NO_MOVE) 
-			return true;
-		else
-			return false;
+        return length != 0 || dir == Direction.NO_MOVE;
 				
 	}
 	public int getSize()

@@ -37,7 +37,7 @@ public abstract class World
 		this.height			= height;
 		this.cellSize		= cellSize;
 		
-		placedActors 		= new HashMap<Integer, Actor>();
+		placedActors 		= new HashMap<>();
 		occupiedCells 		= new CellMap(width, height);
 		
 
@@ -54,7 +54,7 @@ public abstract class World
 		Actor newActor = null;
 		
 		try {
-			newActor = (Actor)objectClass.newInstance();
+			newActor = objectClass.newInstance();
 		} catch (Exception e) 
 		{
 			throw new GameException(GameException.ERROR_CREATING_OBJECT);
@@ -90,19 +90,17 @@ public abstract class World
 			return null;
 		}
 		
-		ArrayList<Actor> resultingActors	=	new ArrayList<Actor>();
+		ArrayList<Actor> resultingActors	=	new ArrayList<>();
 		ArrayList<Integer> actorsOnCell		=	occupiedCells.getObjectsAt(dx, dy);
 		
 		if(actorsOnCell == null) return resultingActors;
-		
-		for(int i = 0; i < actorsOnCell.size(); i++)
-		{
-			Actor chosenActor = getActorByID(actorsOnCell.get(i));
-			if(actorClass.isAssignableFrom(chosenActor.getClass()))
-			{
-				resultingActors.add(chosenActor);
-			}
-		}		
+
+        for (Integer anActorsOnCell : actorsOnCell) {
+            Actor chosenActor = getActorByID(anActorsOnCell);
+            if (actorClass.isAssignableFrom(chosenActor.getClass())) {
+                resultingActors.add(chosenActor);
+            }
+        }
 		return resultingActors;
 	}
 	
@@ -111,7 +109,7 @@ public abstract class World
 		return getObjectsInRect(rect, Actor.class);
 	}
 	public List<Actor> getObjectsInRect(Rectangle rect, Class<? extends Actor> actorClass){
-		return getObjectsInRect((int)rect.getX(), (int)rect.getY(), (int)(rect.getX()+rect.getWidth()-1), (int)(rect.getY()+rect.getHeight()-1), Actor.class);
+		return getObjectsInRect((int)rect.getX(), (int)rect.getY(), (int)(rect.getX()+rect.getWidth()-1), (int)(rect.getY()+rect.getHeight()-1), actorClass);
 	}
 	public List<Actor> getObjectsInRect(Point topLeft, Point bottomRight)
 	{
@@ -127,7 +125,7 @@ public abstract class World
 	}
 	public List<Actor> getObjectsInRect(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, Class<? extends Actor> actorClass)
 	{
-		HashMap<Integer, Actor> resActorMap = new HashMap<Integer, Actor>();
+		HashMap<Integer, Actor> resActorMap = new HashMap<>();
 				
 		for(int y=topLeftY; y<=bottomRightY; y++)
 		{
@@ -135,16 +133,14 @@ public abstract class World
 			{
 				List<Actor> actorsAtPoint = getObjectsAt(x, y, actorClass);
 				if(actorsAtPoint==null) continue;
-				for(int i=0; i<actorsAtPoint.size(); i++)
-				{
-					Actor actorToAdd = actorsAtPoint.get(i);
-					resActorMap.put(actorToAdd.getActorID(), actorToAdd);
-				}
+                for (Actor actorToAdd : actorsAtPoint) {
+                    resActorMap.put(actorToAdd.getActorID(), actorToAdd);
+                }
 			}	
 			
 		}
 		
-		List<Actor> resultingActors = new ArrayList<Actor>();
+		List<Actor> resultingActors = new ArrayList<>();
 		for (Map.Entry<Integer, Actor> entry : resActorMap.entrySet()) {
 		    Actor chosenActor = entry.getValue();
 			if(actorClass.isAssignableFrom(chosenActor.getClass()))
@@ -159,14 +155,14 @@ public abstract class World
 
 	public List<Actor> getObjects(Class<Actor> class1)
 	{
-		List<Actor> resultingActors = null;
+		List<Actor> resultingActors;
 		
 		if(class1 == Actor.class)
 		{
-			return resultingActors = new ArrayList<Actor>(placedActors.values());
+			return new ArrayList<>(placedActors.values());
 		}
 		
-		resultingActors = new ArrayList<Actor>();
+		resultingActors = new ArrayList<>();
 				
 
 		for (Map.Entry<Integer, Actor> entry : placedActors.entrySet()) {
@@ -262,8 +258,8 @@ public abstract class World
 				if(al.size() < 2) 	continue;
 				
 				if(
-						al.contains(firstActor.getActorID()) && 
-						al.contains(secondActor.getActorID())
+						al.contains(firstActor) &&
+						al.contains(secondActor)
 					) return true;
 			}
 		}

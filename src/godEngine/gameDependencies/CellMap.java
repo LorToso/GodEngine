@@ -65,12 +65,12 @@ public class CellMap
 		
 											
 		Point iterator 		= new Point(0,0);
-		for(int y = (int)maxRect.y; y < (int)maxRect.y + maxRect.height; y++)
+		for(int y = maxRect.y; y < maxRect.y + maxRect.height; y++)
 		{
-			for(int x = (int)maxRect.x; x < (int)maxRect.x + maxRect.width; x++)
+			for(int x = maxRect.x; x < maxRect.x + maxRect.width; x++)
 			{
 				iterator.move(x, y);
-				if(oldRect != null && oldRect.contains(iterator))
+				if(oldRect.contains(iterator))
 				{
 					if(occupiedCells[x][y] != null)
 					{
@@ -85,7 +85,7 @@ public class CellMap
 						continue;
 					
 					if(occupiedCells[x][y] == null)
-						occupiedCells[x][y] = new ArrayList<Integer>();
+						occupiedCells[x][y] = new ArrayList<>();
 				
 					occupiedCells[x][y].add(changedActor.getActorID());
 				}				
@@ -115,12 +115,12 @@ public class CellMap
 
 				if(newRect.contains(new Point(x, y)))
 				{
-					// Wenn Transparent, überspringen;
+					// Wenn Transparent, ï¿½berspringen;
 					if(movedActor.getImage().isTransparentAt(x-newRect.x, y-newRect.y)) continue;
 					
 					if(occupiedCells[x][y] == null)
 					{
-						occupiedCells[x][y] = new ArrayList<Integer>();
+						occupiedCells[x][y] = new ArrayList<>();
 					}
 					occupiedCells[x][y].add(movedActor.getActorID());					
 				}	
@@ -151,12 +151,12 @@ public class CellMap
 		{
 			for(int x = newRect.x; x < newRect.x+newRect.width; x++)
 			{
-				// Wenn Transparent, überspringen;
-				if(movedActor.getImage().isTransparentAt((int) (x-newRect.x), (int) (y-newRect.y))) continue;
+				// Wenn Transparent, ï¿½berspringen;
+				if(movedActor.getImage().isTransparentAt(x-newRect.x, y-newRect.y)) continue;
 				
 				if(occupiedCells[x][y] == null)
 				{
-					occupiedCells[x][y] = new ArrayList<Integer>();
+					occupiedCells[x][y] = new ArrayList<>();
 				}
 				occupiedCells[x][y].add(movedActor.getActorID());
 			}

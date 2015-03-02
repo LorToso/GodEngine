@@ -3,21 +3,10 @@ package godEngine.gameContent;
 
 import godEngine.gameDependencies.GameException;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.sound.sampled.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class GodSound 
 {
@@ -127,8 +116,7 @@ public class GodSound
 		FloatControl volumeCtrl = (FloatControl) myClip.getControl(FloatControl.Type.MASTER_GAIN);
 		float value = volumeCtrl.getValue()-volumeCtrl.getMinimum();
 		float range = volumeCtrl.getMaximum()-volumeCtrl.getMinimum();
-		float percentage = value/range * 100;
-		return percentage;
+        return value/range * 100;
 	}
 	public void pause()
 	{
@@ -136,7 +124,7 @@ public class GodSound
 	}
 	public void play()
 	{
-		if(myClip.isRunning() == false && myClip.getFramePosition()!=0)
+		if(!myClip.isRunning() && myClip.getFramePosition()!=0)
 			myClip.setFramePosition(0);
 		
 		myClip.start();

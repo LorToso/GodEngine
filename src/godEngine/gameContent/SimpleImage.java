@@ -117,7 +117,7 @@ public class SimpleImage
 		imagePath = path;
 	}
 	/**
-	 * A private Constructor which is used for the clone() method. It does not recalculate the occupied cells.
+	 * A private Constructor which is used for the doClone() method. It does not recalculate the occupied cells.
 	 * @param image			The BufferedImage.
 	 * @param path			The path that is supposed to be set to the image.
 	 * @param cellSize		The cellSize of the World the image is going to be in.
@@ -167,7 +167,7 @@ public class SimpleImage
 	 * Clones a SimpleImage by creating a deep copy of the occupiedCell Matrix and a deep copy of the actual BufferedImage.
 	 * @return A deep copy of the SimpleImage
 	 */
-	public SimpleImage clone()
+	public SimpleImage doClone()
 	{
 		BufferedImage newImage 	= copyBufferedImage(myImage);
 		int[][] copyOfOccupiedCells = new int[occupiedCells.length][occupiedCells[0].length];

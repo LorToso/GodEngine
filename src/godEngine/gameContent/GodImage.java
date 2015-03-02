@@ -124,7 +124,7 @@ public class GodImage
 	{
 		// If not manipulation has been made yet, the originalImage is created
 		if(originalImage == null)		
-			originalImage = correctImage.clone();
+			originalImage = correctImage.doClone();
 		correctImage = new SimpleImage(doManipulation(originalImage.getBufferedImage()), "modified");
 	}
 	private BufferedImage doManipulation(BufferedImage input)
