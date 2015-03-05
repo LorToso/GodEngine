@@ -6,7 +6,7 @@ import godEngine.gameContent.GodImage;
 import godEngine.gameContent.SimpleImage;
 import godEngine.gameContent.World;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -17,10 +17,7 @@ public class GodGraphicsEngine implements GraphicEngine
 	private BufferedImage frame = null;
 	private World world 		= null;
 	private GamePanel gamePanel = null;
-	
-	public GodGraphicsEngine() throws GameException
-	{
-	}
+
 
 	public void initialize(GamePanel panel, God god) throws GameException 
 	{
@@ -61,7 +58,7 @@ public class GodGraphicsEngine implements GraphicEngine
 	private void initializeImages()
 	{
 		GodImage.initialize(world.getCellSize());
-		SimpleImage.initialize(world.getCellSize());
+
 	}
 	
 	private void createFrame(List<Actor> allActors)
@@ -82,25 +79,22 @@ public class GodGraphicsEngine implements GraphicEngine
 	{
 		if(world.getBackground() != null)
 		{
-			paintImage(world.getBackground(), 0, 0);
+			paintImage(world.getBackground(), new Rectangle(0,0, frame.getWidth(), frame.getHeight()));
 		}
 	}
 	
 	private void paintActor(Actor chosenActor) 
 	{
-		int x = (int) (chosenActor.getX()*world.getCellSize()-chosenActor.getAbsoluteWidth()/2);
-		int y = (int) (chosenActor.getY()*world.getCellSize()-chosenActor.getAbsoluteHeight()/2);
-		
-		paintImage(chosenActor.getImage(), x, y);
+		paintImage(chosenActor.getImage(), chosenActor.getRect());
 	}
-	private void paintImage(GodImage chosenImage, int x, int y) 
+	private void paintImage(GodImage chosenImage, Rectangle rect)
 	{
-		int width = chosenImage.getAbsoluteWidth();
-		int height = chosenImage.getAbsoluteHeight();
+		int width = rect.width;
+		int height = rect.height;
 		
-		if(x > frame.getWidth() || y > frame.getHeight() || x+width < 0 || y+height < 0 ) return;
+		if(rect.x > frame.getWidth() || rect.y > frame.getHeight() || rect.x+width < 0 || rect.y+height < 0 ) return;
 		
-		graphic.drawImage(chosenImage.getImage().getBufferedImage(), x, y, chosenImage.getAbsoluteWidth(), chosenImage.getAbsoluteHeight(), null);		
+		graphic.drawImage(chosenImage.getImage().getBufferedImage(), rect.x, rect.y, width, height, null);
 	}
 }
 

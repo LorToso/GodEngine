@@ -1,9 +1,9 @@
 package catchMeIfYouCan;
 
-import java.util.ArrayList;
-
 import godEngine.gameContent.Actor;
 import godEngine.gameDependencies.GameException;
+
+import java.util.ArrayList;
 
 public class Clone extends MovingObject 
 {
@@ -62,16 +62,22 @@ public class Clone extends MovingObject
 	public void eat() throws GameException
 	{
 		ArrayList<Actor> intersectingObjects = (ArrayList<Actor>) getIntersectingObjects(MovingObject.class);
-		if(intersectingObjects.isEmpty()) return;
+
+        if(intersectingObjects.isEmpty())
+            return;
 		
-		for(int i=0; i<intersectingObjects.size(); i++)
+		for(int i=0; i < intersectingObjects.size(); i++)
 		{
-			Actor chosenActor = intersectingObjects.get(0);
+			MovingObject chosenActor = (MovingObject)intersectingObjects.get(0);
+
 			if(chosenActor instanceof Clone)
 			{
 				Clone chosenClone = (Clone) chosenActor;
-				if(chosenClone.getCloneNumber() < getCloneNumber()) return;
-				int newSize = Math.max(getSize(), chosenClone.getSize())+2;
+
+                if(chosenClone.getCloneNumber() < getCloneNumber())
+                    return;
+
+                int newSize = Math.max(getSize(), chosenClone.getSize())+2;
 				getWorld().removeObject(chosenActor);
 				intersectingObjects.remove(0);
 				setSize(originalSize*newSize, originalSize*newSize);

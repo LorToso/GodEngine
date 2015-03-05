@@ -1,12 +1,13 @@
 package godEngine.gameContent;
+
 import godEngine.gameDependencies.GameException;
 import godEngine.gameDependencies.GodMouseInfo;
 import godEngine.gameDependencies.GraphicEngine;
 import godEngine.gameDependencies.InputEngine;
 
-import java.lang.Math;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Vector;
 
 
 public class God 
@@ -121,12 +122,13 @@ public class God
 	}
 	private void actorLoop() throws GameException
 	{
-		ArrayList<Actor> placedActors = (ArrayList<Actor>) myWorld.getObjects(Actor.class);
-		Actor chosenActor = null;
+        List<Actor> allActors = myWorld.getObjects(Actor.class);
+        Vector<Actor> tempActors = new Vector<>(allActors);
 
-        for (Actor placedActor : placedActors) {
-            chosenActor = placedActor;
-            chosenActor.doAct();
+
+        for (Actor chosenActor : tempActors) {
+            if(chosenActor.getWorld() != null)
+                chosenActor.act();
         }
 	}
 	public World getWorld()
@@ -141,8 +143,8 @@ public class God
 	@SuppressWarnings("unchecked")
 	public World createWorld(String worldPath) throws GameException
 	{
-		Class<World> worldClass = null;
-		World world = null;
+		Class<World> worldClass;
+		World world;
 		try {
 			worldClass = (Class<World>) Class.forName(worldPath);
 			world = worldClass.newInstance();

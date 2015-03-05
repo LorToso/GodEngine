@@ -5,25 +5,16 @@ import godEngine.gameDependencies.GameException;
 
 public class Obstacle extends Actor {
 
-	public Obstacle()
-	{
-		setStartImage("Laby.png");
-	}
 	@Override
 	protected void addedToWorld() throws GameException 
 	{
+        setImage("Laby.png");
 	}
 
 	@Override
-	public void act() throws GameException {
-		// TODO Auto-generated method stub
-
-	}
+	public void act() throws GameException {	}
 
 	@Override
-	protected void removedFromWorld() throws GameException {
-		// TODO Auto-generated method stub
-		
-	}
+	protected void removedFromWorld() throws GameException {	}
 
 }

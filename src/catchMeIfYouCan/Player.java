@@ -8,16 +8,15 @@ import java.awt.event.KeyEvent;
 public class Player extends MovingObject {
 
 	Map map;
-	public Player() throws GameException
-	{
-	}
+
+
 	protected void addedToWorld() throws GameException 
 	{
-		setSize(originalSize,originalSize);
+        setSize(originalSize,originalSize);
 		map = (Map)getWorld();
 	}
 
-	public void act() throws GameException 
+    public void act() throws GameException
 	{
 		if(God.isKeyDown(KeyEvent.VK_UP))
 			move(Direction.TOP);
